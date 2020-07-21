@@ -1,0 +1,9 @@
+.vscode/
+.idea
+
+/node_modules
+.envrc
+yarn-error.log
+.DS_Store
+
+/out
