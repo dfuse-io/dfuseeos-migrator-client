@@ -11,6 +11,10 @@
     "email": "dev@dfuse.io",
     "url": "https://dfuse.io"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "prepublishOnly": "yarn build",
     "prebuild": "rimraf dist",
