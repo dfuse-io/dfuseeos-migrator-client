@@ -1,4 +1,5 @@
-import { Migrator, Element, Account, TableScope } from '../src'
+import { Migrator, Element, Account, TableScope } from '@dfuse/migrator-client'
+const path = require("path");
 
 const onAccount = (account: Account): Account | undefined => {
   console.log(`received account: ${account.name}`)
@@ -56,7 +57,10 @@ const onTable = (tableScope: TableScope): TableScope | undefined => {
   return tableScope
 }
 
-const migrator = new Migrator("sample-input-data", "out")
+const inputDir = path.join(__dirname,"sample-input-data")
+const outputDir = path.join(__dirname,"out")
+const migrator = new Migrator(inputDir, outputDir)
+
 migrator.Migrate((element: Element) => {
   if (element.type === "account") {
     return onAccount(element)

@@ -20,3 +20,4 @@ export declare function isDir(dirPath: string): boolean;
 export declare function getFilename(dirPath: string): string;
 export declare function getAccountPath(dirPath: string): string;
 export declare function fileExists(filepath: string): boolean;
+export declare function cleanDir(dirPath: string): void;

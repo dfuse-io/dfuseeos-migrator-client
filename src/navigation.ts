@@ -1,7 +1,7 @@
 const fs = require("fs");
-import { promises as fsPromises } from 'fs'
 const logger = require('debug')('dfuse:helper')
 const errLogger = require('debug')('dfuse:helper:error')
+const  rimraf = require("rimraf");
 
 const path = require('path');
 
@@ -149,6 +149,10 @@ export function getAccountPath(dirPath: string): string {
 
 export function fileExists(filepath: string): boolean {
   return fs.existsSync(filepath)
+}
+
+export function cleanDir(dirPath: string) {
+  rimraf.sync(dirPath)
 }
 
 function readFile(absFilepath: string): (Buffer | undefined) {

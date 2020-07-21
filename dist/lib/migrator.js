@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Migrator = void 0;
 const fs = require("fs");
 const path = require("path");
-const rimraf = require("rimraf");
 const logger = require('debug')('dfuse:migrator');
 const navigation_1 = require("./navigation");
 const walk_1 = require("./walk");
@@ -35,7 +34,11 @@ class Migrator {
         navigation_1.writeTableScope(this.outDataPath, tblScope);
     }
     Migrate(onElement) {
-        rimraf.sync(this.outDataPath);
+        navigation_1.cleanDir(this.outDataPath);
+        if (!navigation_1.fileExists(this.inDataPath)) {
+            throw ("Cannot find input migration data located at '" + this.inDataPath + "'");
+            return;
+        }
         this.walkElements(this.inDataPath, {
             onAccount: (account) => {
                 const acc = onElement(account);

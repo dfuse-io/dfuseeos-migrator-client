@@ -1,8 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const  rimraf = require("rimraf");
 const logger = require('debug')('dfuse:migrator')
-
 import { Account, Limits, Element, Row, TableScope } from "./types"
 import {
   getAccountName,
@@ -19,6 +17,7 @@ import {
   getAccountPath,
   fileExists,
   getRows,
+  cleanDir,
 } from "./navigation"
 import { WalkFiles, OnFile } from "./walk"
 
@@ -70,7 +69,12 @@ export class Migrator {
   }
 
   Migrate(onElement: (element: Element) => Element | undefined): void {
-    rimraf.sync(this.outDataPath)
+    cleanDir(this.outDataPath)
+    if (!fileExists(this.inDataPath)) {
+      throw("Cannot find input migration data located at '" + this.inDataPath + "'")
+      return
+    }
+
     this.walkElements(this.inDataPath, {
       onAccount: (account: Account): (Account | undefined) => {
         const acc = onElement(account)

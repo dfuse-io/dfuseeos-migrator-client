@@ -1,5 +1,5 @@
-const { Migrator } = require("../dist/lib")
-
+const { Migrator } = require("@dfuse/migrator-client")
+const path = require("path")
 const onAccount = (account) => {
   console.log(`received account: ${account.name}`)
   // To delete an account, return `undefined`, will not walk rows at this point anymore
@@ -55,8 +55,10 @@ const onTable = (tableScope) => {
 
   return tableScope
 }
+const inputDir = path.join(__dirname,"sample-input-data")
+const outputDir = path.join(__dirname,"out")
+const migrator = new Migrator(inputDir, outputDir)
 
-const migrator = new Migrator("sample-input-data", "out")
 
 migrator.Migrate((element) => {
   if (element.type === "account") {

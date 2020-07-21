@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fileExists = exports.getAccountPath = exports.getFilename = exports.isDir = exports.writeTableScope = exports.writeWasm = exports.writeABI = exports.writeAccountInfo = exports.writeAccount = exports.getRows = exports.explodeRowsPath = exports.getAccount = exports.getWasm = exports.getABI = exports.isTableScope = exports.isAccount = exports.getAccountName = void 0;
+exports.cleanDir = exports.fileExists = exports.getAccountPath = exports.getFilename = exports.isDir = exports.writeTableScope = exports.writeWasm = exports.writeABI = exports.writeAccountInfo = exports.writeAccount = exports.getRows = exports.explodeRowsPath = exports.getAccount = exports.getWasm = exports.getABI = exports.isTableScope = exports.isAccount = exports.getAccountName = void 0;
 const fs = require("fs");
 const logger = require('debug')('dfuse:helper');
 const errLogger = require('debug')('dfuse:helper:error');
+const rimraf = require("rimraf");
 const path = require('path');
 function getAccountName(accountJsonPath) {
     const chunks = accountJsonPath.split("/");
@@ -148,6 +149,10 @@ function fileExists(filepath) {
     return fs.existsSync(filepath);
 }
 exports.fileExists = fileExists;
+function cleanDir(dirPath) {
+    rimraf.sync(dirPath);
+}
+exports.cleanDir = cleanDir;
 function readFile(absFilepath) {
     if (!absFilepath.startsWith("/")) {
         absFilepath = "/" + absFilepath;
