@@ -71,7 +71,7 @@ export class Migrator {
 
   Migrate(onElement: (element: Element) => Element | undefined): void {
     rimraf.sync(this.outDataPath)
-    this.walk(this.inDataPath, {
+    this.walkElements(this.inDataPath, {
       onAccount: (account: Account): (Account | undefined) => {
         const acc = onElement(account)
         if (acc && acc?.type == "account") {
@@ -93,7 +93,7 @@ export class Migrator {
     })
   }
 
-  async walk(dir: string,  handlers: walkSpec) {
+  async walkElements(dir: string, handlers: walkSpec) {
     WalkFiles(dir, filePath => {
       const filename = getFilename(filePath)
       if (isAccount(filename)) {

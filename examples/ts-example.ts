@@ -1,5 +1,4 @@
-import { Migrator } from './migrator'
-import { Element, Account, TableScope } from './types'
+import { Migrator, Element, Account, TableScope } from '../src'
 
 const onAccount = (account: Account): Account | undefined => {
   console.log(`received account: ${account.name}`)
@@ -49,7 +48,7 @@ const onTable = (tableScope: TableScope): TableScope | undefined => {
         amount:"100",
         account: "",
         id:10
-    }})
+      }})
 
     return tableScope
   }
@@ -57,32 +56,30 @@ const onTable = (tableScope: TableScope): TableScope | undefined => {
   return tableScope
 }
 
-export async function main(inputData: string, outputData: string) {
-  const migrator = new Migrator(inputData, outputData)
-  migrator.Migrate((element: Element) => {
-      if (element.type === "account") {
-        return onAccount(element)
-      }
+const migrator = new Migrator("sample-input-data", "out")
+migrator.Migrate((element: Element) => {
+  if (element.type === "account") {
+    return onAccount(element)
+  }
 
-      if (element.type === "tableScope") {
-        return onTable(element)
-      }
+  if (element.type === "tableScope") {
+    return onTable(element)
+  }
 
-      // Untouched
-      return element
-    })
-  // Add new account after `Migrate` so they are not walked, it's where you also define list of new tables to add.
-  migrator.AddAccount("ultra.new", {
-    abi: "ABI 1.0/",
-    wasm: "wasm code!",
-  })
+  // Untouched
+  return element
+})
+// Add new account after `Migrate` so they are not walked, it's where you also define list of new tables to add.
+migrator.AddAccount("ultra.new", {
+  abi: "ABI 1.0/",
+  wasm: "wasm code!",
+})
 
-  // Add rows to an existing account, override
-  migrator.AddTable("ultra.new", "accounts", "ultra.nft", [
-    {
-      key: "value",
-      payer: "value",
-      json_data: { name: "accounts" },
-    },
-  ])
-}
+// Add rows to an existing account, override
+migrator.AddTable("ultra.new", "accounts", "ultra.nft", [
+  {
+    key: "value",
+    payer: "value",
+    json_data: { name: "accounts" },
+  },
+])
