@@ -1,6 +1,6 @@
 {
   "name": "@dfuse/migrator-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "dfuse JavaScript/TypeScript Migrator Library (for [dfuse for EOSIO](https://github.com/dfuse-io/dfuse-eosio))",
   "main": "dist/lib/index.js",
   "typings": "dist/types/index.d.ts",
