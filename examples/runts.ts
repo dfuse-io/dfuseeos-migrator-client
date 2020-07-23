@@ -31,13 +31,13 @@ const onTable = (tableScope: TableScope): TableScope | undefined => {
   }
 
   // Modifiy the rows of a table/scope pair
-  if (tableScope.contract === "battlefield3" && tableScope.tableName === "member" && tableScope.scope === "battlefield3") {
+  if (tableScope.contract === "eosio.token" && tableScope.tableName === "accounts" && tableScope.scope === "battlefield3") {
     // Delete unwanted rows
     tableScope.rows = tableScope.rows.filter((row) => row.key > "")
 
     // Modify the remaining rows
     tableScope.rows = tableScope.rows.map((row) => {
-      row.json_data = { ...row.json_data, memo: row.json_data.memo.toUpperCase() }
+      row.json_data = { ...row.json_data, memo: row.json_data.memo.tof }
       return row
     })
 

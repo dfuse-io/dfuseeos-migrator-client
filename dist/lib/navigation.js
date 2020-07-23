@@ -117,7 +117,7 @@ function writeTableScope(basePath, tblScope) {
     const encodedTblName = encodeName(tblScope.tableName);
     const encodedScopeName = encodeName(tblScope.scope);
     const accountPath = path.join(basePath, ...nestedPath(encodedContractName).split("/"));
-    const tablePath = path.join(accountPath, "table", encodedTblName);
+    const tablePath = path.join(accountPath, "tables", encodedTblName);
     const scopePath = path.join(tablePath, ...nestedPath(encodedScopeName).split("/"));
     logger("writing table scope %s:%s:%s at %s", tblScope.contract, tblScope.tableName, tblScope.scope, scopePath);
     fs.mkdirSync(scopePath, { recursive: true });
