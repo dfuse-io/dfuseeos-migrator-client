@@ -20,8 +20,15 @@ export declare type TableScope = {
     scope: string;
     rows: Row[];
 };
+export declare type SecondaryIndex = {
+    kind: string;
+    value: any;
+    payer: string;
+};
 export declare type Row = {
     payer: string;
     key: string;
-    json_data: any;
+    json_data?: any;
+    hex_data?: any;
+    secondary_indexes: SecondaryIndex[];
 };
