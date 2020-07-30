@@ -24,8 +24,16 @@ export type TableScope = {
   rows: Row[]
 }
 
+export type SecondaryIndex = {
+  kind: string
+  value: any
+  payer: string
+}
+
 export type Row = {
   payer: string
   key: string
-  json_data: any
+  json_data?: any
+  hex_data?: any
+  secondary_indexes: SecondaryIndex[]
 }
