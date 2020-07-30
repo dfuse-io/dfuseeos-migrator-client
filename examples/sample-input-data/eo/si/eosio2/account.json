@@ -1,42 +1,32 @@
 {
   "permissions": [
     {
-      "id": 10,
-      "parent_id": 9,
       "owner": "eosio2",
-      "name": "active",
-      "last_updated": {
-        "seconds": 1593175845,
-        "nanos": 500000000
-      },
+      "name": "owner",
       "authority": {
         "threshold": 1,
         "keys": [
           {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
             "weight": 1
           }
         ]
       }
     },
     {
-      "id": 9,
+      "parent": "owner",
       "owner": "eosio2",
-      "name": "owner",
-      "last_updated": {
-        "seconds": 1593175845,
-        "nanos": 500000000
-      },
+      "name": "active",
       "authority": {
         "threshold": 1,
         "keys": [
           {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
             "weight": 1
           }
         ]
       }
     }
   ],
-  "link_auths": []
+  "link_auths": null
 }

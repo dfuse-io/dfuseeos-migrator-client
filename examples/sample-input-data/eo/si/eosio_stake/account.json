@@ -1,14 +1,8 @@
 {
   "permissions": [
     {
-      "id": 24,
-      "parent_id": 23,
       "owner": "eosio.stake",
-      "name": "active",
-      "last_updated": {
-        "seconds": 1593175846,
-        "nanos": 500000000
-      },
+      "name": "owner",
       "authority": {
         "threshold": 1,
         "accounts": [
@@ -23,13 +17,9 @@
       }
     },
     {
-      "id": 23,
+      "parent": "owner",
       "owner": "eosio.stake",
-      "name": "owner",
-      "last_updated": {
-        "seconds": 1593175846,
-        "nanos": 500000000
-      },
+      "name": "active",
       "authority": {
         "threshold": 1,
         "accounts": [
@@ -44,5 +34,5 @@
       }
     }
   ],
-  "link_auths": []
+  "link_auths": null
 }

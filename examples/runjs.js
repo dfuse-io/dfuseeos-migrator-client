@@ -36,7 +36,7 @@ const onTable = (tableScope) => {
 
     // Modify the remaining rows
     tableScope.rows = tableScope.rows.map((row) => {
-      row.json_data = { ...row.json_data, memo: row.json_data.memo.toUpperCase() }
+      row.jsonData = { ...row.json_data, memo: row.json_data.memo.toUpperCase() }
       return row
     })
 

@@ -1,40 +1,32 @@
 {
   "permissions": [
     {
-      "id": 46,
-      "parent_id": 45,
       "owner": "notified3",
-      "name": "active",
-      "last_updated": {
-        "seconds": 1593175846
-      },
+      "name": "owner",
       "authority": {
         "threshold": 1,
         "keys": [
           {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
             "weight": 1
           }
         ]
       }
     },
     {
-      "id": 45,
+      "parent": "owner",
       "owner": "notified3",
-      "name": "owner",
-      "last_updated": {
-        "seconds": 1593175846
-      },
+      "name": "active",
       "authority": {
         "threshold": 1,
         "keys": [
           {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
             "weight": 1
           }
         ]
       }
     }
   ],
-  "link_auths": []
+  "link_auths": null
 }

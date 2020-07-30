@@ -1,14 +1,22 @@
 {
   "permissions": [
     {
-      "id": 38,
-      "parent_id": 37,
+      "owner": "battlefield5",
+      "name": "owner",
+      "authority": {
+        "threshold": 1,
+        "keys": [
+          {
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    {
+      "parent": "owner",
       "owner": "battlefield5",
       "name": "active",
-      "last_updated": {
-        "seconds": 1593175849,
-        "nanos": 500000000
-      },
       "authority": {
         "threshold": 5,
         "accounts": [
@@ -50,32 +58,23 @@
       }
     },
     {
-      "id": 53,
-      "parent_id": 38,
+      "parent": "active",
       "owner": "battlefield5",
       "name": "claimer",
-      "last_updated": {
-        "seconds": 1593175849,
-        "nanos": 500000000
-      },
       "authority": {
         "threshold": 1,
         "keys": [
           {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
             "weight": 1
           }
         ]
       }
     },
     {
-      "id": 54,
-      "parent_id": 38,
+      "parent": "active",
       "owner": "battlefield5",
       "name": "day2day",
-      "last_updated": {
-        "seconds": 1593175850
-      },
       "authority": {
         "threshold": 1,
         "accounts": [
@@ -102,31 +101,9 @@
           }
         ]
       }
-    },
-    {
-      "id": 37,
-      "owner": "battlefield5",
-      "name": "owner",
-      "last_updated": {
-        "seconds": 1593175846
-      },
-      "authority": {
-        "threshold": 1,
-        "keys": [
-          {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
-            "weight": 1
-          }
-        ]
-      }
     }
   ],
   "link_auths": [
-    {
-      "permission": "day2day",
-      "contract": "eosio",
-      "action": "claimrewards"
-    },
     {
       "permission": "day2day",
       "contract": "eosio",
@@ -136,6 +113,11 @@
       "permission": "day2day",
       "contract": "eosio",
       "action": "unregprod"
+    },
+    {
+      "permission": "day2day",
+      "contract": "eosio",
+      "action": "claimrewards"
     }
   ]
 }

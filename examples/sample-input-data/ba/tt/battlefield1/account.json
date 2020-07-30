@@ -1,18 +1,27 @@
 {
   "permissions": [
     {
-      "id": 32,
-      "parent_id": 31,
       "owner": "battlefield1",
-      "name": "active",
-      "last_updated": {
-        "seconds": 1593175849
-      },
+      "name": "owner",
       "authority": {
         "threshold": 1,
         "keys": [
           {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    {
+      "parent": "owner",
+      "owner": "battlefield1",
+      "name": "active",
+      "authority": {
+        "threshold": 1,
+        "keys": [
+          {
+            "key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
             "weight": 1
           }
         ],
@@ -26,24 +35,7 @@
           }
         ]
       }
-    },
-    {
-      "id": 31,
-      "owner": "battlefield1",
-      "name": "owner",
-      "last_updated": {
-        "seconds": 1593175846
-      },
-      "authority": {
-        "threshold": 1,
-        "keys": [
-          {
-            "public_key": "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
-            "weight": 1
-          }
-        ]
-      }
     }
   ],
-  "link_auths": []
+  "link_auths": null
 }

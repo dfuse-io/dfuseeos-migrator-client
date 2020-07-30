@@ -23,7 +23,7 @@ const onAccount = (account: Account): Account | undefined => {
 }
 
 const onTable = (tableScope: TableScope): TableScope | undefined => {
-  console.log(`received table scope: ${tableScope.contract} ${tableScope.tableName}`)
+  console.log(`received table scope: ${tableScope.contract} ${tableScope.tableName} with ${tableScope.rows.length} rows`)
 
   // To delete all table/scope pair for a given table
   if (tableScope.contract === "eosio.token" && tableScope.tableName === "accounts") {
@@ -31,27 +31,31 @@ const onTable = (tableScope: TableScope): TableScope | undefined => {
   }
 
   // Modifiy the rows of a table/scope pair
-  if (tableScope.contract === "eosio.token" && tableScope.tableName === "accounts" && tableScope.scope === "battlefield3") {
-    // Delete unwanted rows
-    tableScope.rows = tableScope.rows.filter((row) => row.key > "")
+  if (tableScope.contract === "eosio.token" && tableScope.tableName === "accounts") {
+    if (tableScope.scope === "battlefield3") {
+      // Delete unwanted rows
+      tableScope.rows = tableScope.rows.filter((row) => row.key > "")
 
-    // Modify the remaining rows
-    tableScope.rows = tableScope.rows.map((row) => {
-      row.json_data = { ...row.json_data, memo: row.json_data.memo.tof }
-      return row
-    })
+      // Modify the remaining rows
+      tableScope.rows = tableScope.rows.map((row) => {
+        row.json_data = { ...row.json_data, memo: row.json_data.memo.tof }
+        return row
+      })
 
-    // Add new rows
-    tableScope.rows.push({ key: "accc", payer: "battlefield3", json_data: {
-        expires_at: "1970-01-01T00:00:00",
-        created_at:"2020-06-26T12:51:03",
-        memo: "new row added",
-        amount:"100",
-        account: "",
-        id:10
-      }})
+      // Add new json_data
+      tableScope.rows.push({
+        key: "accc", payer: "battlefield3", json_data: {
+          expires_at: "1970-01-01T00:00:00",
+          created_at: "2020-06-26T12:51:03",
+          memo: "new row added",
+          amount: "100",
+          account: "",
+          id: 10
+        }, secondary_indexes: []
+      })
 
-    return tableScope
+      return tableScope
+    }
   }
 
   return tableScope
@@ -85,5 +89,6 @@ migrator.AddTable("ultra.new", "accounts", "ultra.nft", [
     key: "value",
     payer: "value",
     json_data: { name: "accounts" },
+    secondary_indexes: [],
   },
 ])
