@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Account, Limits, Element, Row, TableScope } from "./types";
+import { Account, Limits, Element, Row, TableScope, AccountInfo } from "./types";
 export declare type OnTableScope = (table: TableScope) => (TableScope | undefined);
 interface walkSpec {
     onAccount: (account: Account) => (Account | undefined);
@@ -13,6 +13,7 @@ export declare class Migrator {
     AddAccount(name: string, spec?: {
         abi?: string | Buffer;
         wasm?: string | Buffer;
+        info?: AccountInfo;
         limits?: Limits;
     }): void;
     AddTable(contract: string, name: string, scope: string, rows: Row[]): void;

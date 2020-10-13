@@ -1,4 +1,5 @@
 import { Migrator, Element, Account, TableScope } from '@dfuse/migrator-client'
+import ownKeys = Reflect.ownKeys
 const path = require("path");
 
 const onAccount = (account: Account): Account | undefined => {
@@ -6,16 +7,20 @@ const onAccount = (account: Account): Account | undefined => {
   // To delete an account, return `undefined`, will not walk rows at this point anymore
   if (account.name === "battlefield4") {
     return undefined
+
   }
 
   // To modify an account, return the account with the desired changes
-  if (account.name === "battlefeld3") {
-    account.abi = "ABI 2.0/"
-    // account.limits = {
-    //   cpu: -1,
-    //   net: -1,
-    //   ram: -1,
-    // }
+  if (account.name === "battlefield3") {
+    account.data.permissions = account.data.permissions.map(perm => {
+      if (perm.name != "active") {
+        return perm
+      }
+      if (perm.authority.keys) {
+        perm.authority.keys[0].key = "EOSxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+      return perm
+    })
     return account
   }
 
@@ -81,6 +86,37 @@ migrator.Migrate((element: Element) => {
 migrator.AddAccount("ultra.new", {
   abi: "ABI 1.0/",
   wasm: "wasm code!",
+  info: {
+    permissions: [
+      {
+        owner: "ultra.new",
+        name: "owner",
+        authority: {
+          threshold: 1,
+          keys: [
+            {
+              key: "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+              weight: 1,
+            }
+          ]
+        }
+      },
+      {
+        parent: "owner",
+        owner: "ultra.new",
+        name: "active",
+        authority: {
+          threshold: 1,
+          keys: [
+            {
+              key: "EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP",
+              weight: 1,
+            }
+          ]
+        }
+      }
+    ]
+  }
 })
 
 // Add rows to an existing account, override

@@ -1,11 +1,11 @@
 /// <reference types="node" />
-import { Account, Row, TableScope } from "./types";
+import { Account, AccountInfo, Row, TableScope } from "./types";
 export declare function getAccountName(accountJsonPath: string): string;
 export declare function isAccount(fileName: string): boolean;
 export declare function isTableScope(fileName: string): boolean;
 export declare function getABI(accountJsonPath: string): (Buffer | undefined);
 export declare function getWasm(accountJsonPath: string): (Buffer | undefined);
-export declare function getAccount(accountJsonPath: string): (Buffer | undefined);
+export declare function getAccountInfo(accountJsonPath: string): (AccountInfo);
 export declare function explodeRowsPath(rowsPath: string): {
     tableName: string;
     scope: string;

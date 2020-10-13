@@ -11,9 +11,54 @@ export type Account = {
   type: "account"
   name: string
   limits: Limits
-  data: string | Buffer
+  data: AccountInfo
   abi?: string | Buffer
   wasm?: string | Buffer
+}
+
+export type AccountInfo = {
+  permissions: Permission[]
+  link_auths?: LinkAuth[] | undefined
+}
+
+export type LinkAuth  =  {
+  permission: string
+  contract:   string
+  action:     string
+}
+
+export type Permission = {
+  parent?: string
+  owner: string
+  name: string
+  authority: Authority
+}
+
+export type Authority = {
+  threshold: number
+  keys?: KeyWeightPermission[]
+  accounts?: AccountWeightPermission[]
+  waits?: WaitWeight[]
+}
+
+export type WaitWeight = {
+  wait_sec: number
+  weight: number
+}
+
+export type KeyWeightPermission = {
+  key: string
+  weight: number
+}
+
+export type AccountWeightPermission = {
+  permission: AccountPermissionLevel
+  weight: number
+}
+
+export type AccountPermissionLevel = {
+  permission: string
+  actor: string
 }
 
 export type TableScope = {

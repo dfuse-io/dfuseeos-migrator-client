@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const logger = require('debug')('dfuse:migrator')
-import { Account, Limits, Element, Row, TableScope } from "./types"
+import { Account, Limits, Element, Row, TableScope, AccountInfo } from "./types"
 import {
   getAccountName,
   isAccount,
@@ -10,7 +10,7 @@ import {
   getWasm,
   writeAccount,
   writeTableScope,
-  getAccount,
+  getAccountInfo,
   explodeRowsPath,
   getAccountPath,
   fileExists,
@@ -41,6 +41,7 @@ export class Migrator {
     spec: {
       abi?: string | Buffer
       wasm?: string | Buffer
+      info?: AccountInfo
       limits?: Limits
     } = {}
   ) {
@@ -48,7 +49,7 @@ export class Migrator {
       type: "account",
       name: name,
       limits: spec.limits,
-      data: {},
+      data: spec.info || {},
       abi: spec.abi,
       wasm: spec.wasm,
     } as Account
@@ -124,10 +125,8 @@ export class Migrator {
     if (wasm) {
       account.wasm = wasm
     }
-    const accountData = getAccount(dirPath)
-    if (accountData) {
-      account.data = accountData
-    }
+    const accountData = getAccountInfo(dirPath)
+    account.data = accountData
     return account
   }
 

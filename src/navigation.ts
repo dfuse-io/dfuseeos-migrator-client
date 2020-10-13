@@ -5,7 +5,7 @@ const  rimraf = require("rimraf");
 
 const path = require('path');
 
-import { Account, Row, TableScope } from "./types"
+import { Account, AccountInfo, Row, TableScope } from "./types"
 
 export function getAccountName(accountJsonPath: string): string {
   const chunks = accountJsonPath.split("/")
@@ -32,8 +32,13 @@ export function getWasm(accountJsonPath: string): (Buffer | undefined){
   return readFile(path.join(...chunks))
 }
 
-export function getAccount(accountJsonPath: string): (Buffer | undefined){
-  return readFile(accountJsonPath)
+export function getAccountInfo(accountJsonPath: string): (AccountInfo){
+  const accountCnt =  readFile(accountJsonPath)
+  if (accountCnt) {
+    const accountInfo = JSON.parse(accountCnt.toString())
+    return accountInfo as AccountInfo
+  }
+  return {} as AccountInfo
 }
 
 export function explodeRowsPath(rowsPath: string): {tableName: string, scope: string}  {
@@ -84,7 +89,8 @@ export function writeAccount(basePath: string, account: Account) {
 
 export function writeAccountInfo(accountPath: string, account: Account) {
   try{
-    const resp = fs.writeFileSync(path.join(accountPath, "account.json"),account.data)
+    const accountDataCnt = JSON.stringify(account.data, null, '\t')
+    const resp = fs.writeFileSync(path.join(accountPath, "account.json"), accountDataCnt)
   }catch (e) {
     errLogger("unable to write account.json for account %s @ %s", account.name, accountPath)
   }

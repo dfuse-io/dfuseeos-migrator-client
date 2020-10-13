@@ -1,20 +1,24 @@
 const { Migrator } = require("@dfuse/migrator-client")
 const path = require("path")
+
 const onAccount = (account) => {
-  console.log(`received account: ${account.name}`)
+  console.log(`received accountsss: ${account.name}`)
   // To delete an account, return `undefined`, will not walk rows at this point anymore
   if (account.name === "battlefield4") {
     return undefined
   }
 
   // To modify an account, return the account with the desired changes
-  if (account.name === "battlefeld3") {
-    account.abi = "ABI 2.0/"
-    // account.limits = {
-    //   cpu: -1,
-    //   net: -1,
-    //   ram: -1,
-    // }
+  if (account.name === "battlefield3") {
+    account.data.permissions = account.data.permissions.map(perm => {
+      if (perm.name != "active") {
+        return perm
+      }
+      if (perm.authority.keys) {
+        perm.authority.keys[0].key = "EOSxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+      return perm
+    })
     return account
   }
 
